@@ -1,4 +1,4 @@
-package com.example.login10.view.product
+package com.example.login10.view.home.product
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

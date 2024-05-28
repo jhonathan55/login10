@@ -19,13 +19,12 @@
         android:layout_marginTop="66dp"
         android:layout_marginBottom="16dp"/>
 
-
 <com.google.android.material.textfield.TextInputLayout
     android:id="@+id/usernameTextInputLayout"
     app:layout_constraintTop_toBottomOf="@id/textViewLogin"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
-    app:startIconDrawable="@drawable/baseline_account_circle_24"
+    app:startIconDrawable="@drawable/baseline_settings_accessibility_24"
     android:text="@string/username"
     android:hint="@string/username"
     android:layout_width="0dp"
@@ -57,7 +56,6 @@
         android:inputType="textPassword"
         />
 </com.google.android.material.textfield.TextInputLayout>
-
 
 <com.google.android.material.button.MaterialButton
     android:layout_width="0dp"
