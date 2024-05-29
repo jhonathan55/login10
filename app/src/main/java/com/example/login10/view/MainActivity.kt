@@ -17,15 +17,21 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
-        supportActionBar?.setTitle("Infocal")
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.nav_host_Fragment) as NavHostFragment
         navController=navHostFragment.navController
+
+
         setupActionBarWithNavController(navController)
         this.setupDestinationChangedListener()
     }
     private fun setupDestinationChangedListener() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
+                R.id.loginFragment -> {
+                    supportActionBar?.title = "Infocal"
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                    supportActionBar?.setDisplayShowHomeEnabled(false)
+                }
                 R.id.registerFragment -> {
                     supportActionBar?.setDisplayHomeAsUpEnabled(true)
                     supportActionBar?.setDisplayShowHomeEnabled(true)
