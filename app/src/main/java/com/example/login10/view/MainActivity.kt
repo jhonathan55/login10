@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         super.onPrepareOptionsMenu(menu)
         val logoutItem = menu?.findItem(R.id.action_logout)
+
         logoutItem?.isVisible = navController.currentDestination?.id == R.id.homeFragment
         return super.onPrepareOptionsMenu(menu)
     }
