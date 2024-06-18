@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.login10.R
 import com.example.login10.databinding.FragmentProductBinding
 import com.example.login10.view.home.product.adacter.ProductAdapter
+import com.example.login10.view.home.product.adacter.ProductAdapterGeneric
 import com.example.login10.view.home.product.data.Product
 
 
@@ -24,10 +25,8 @@ class ProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentProductBinding.inflate(inflater, container, false)
-        val recyclerView: RecyclerView = binding.recyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
 
+        _binding = FragmentProductBinding.inflate(inflater, container, false)
         val products= listOf(
             Product("Product 1", "Description of product 1", 10.99),
             Product("Product 2", "Description of product 2", 12.49),
@@ -47,8 +46,10 @@ class ProductFragment : Fragment() {
             Product("Product 16", "Description of product 16", 29.99),
             Product("Product 17", "Description of product 17", 31.99),
         )
-        val adapter = ProductAdapter(products)
-        recyclerView.adapter = adapter
+        val recyclerView: RecyclerView = binding.recyclerView
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = ProductAdapterGeneric(products)
+
         return binding.root
     }
     override fun onDestroyView() {

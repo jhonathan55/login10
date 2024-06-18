@@ -16,7 +16,8 @@ class ProductAdapter(private val products: List<Product>)
         val price: TextView = view.findViewById(R.id.product_price)
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product, parent, false)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_product, parent, false)
         return ProductViewHolder(view)
     }
 
