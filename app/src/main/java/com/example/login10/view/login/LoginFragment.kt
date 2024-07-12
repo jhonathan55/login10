@@ -7,15 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.login10.R
 import com.example.login10.databinding.FragmentLoginBinding
+import com.example.login10.model.LoginRequest
+import com.example.login10.viewModels.LoginViewModel
 
 
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
+    private val loginViewModel: LoginViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,15 +56,9 @@ class LoginFragment : Fragment() {
             binding.passwordTextInputLayout.error=null
         }
         if (isValid){
-            if(username=="admin"&&password=="admin") {
-                Toast.makeText(requireContext(), "login ok", Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-            }else{
-                Toast.makeText(requireContext(), "Invalid username or password", Toast.LENGTH_SHORT).show()
-                binding.errorTextView.visibility=View.VISIBLE
-                binding.errorTextView.text="Invalid username or password"
-            }
-
+            loginViewModel.login(LoginRequest(username,password))
+        }else{
+           binding.errorTextView.visibility=View.GONE
         }
     }
 
@@ -80,10 +77,21 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        // Navegar al HomeFragment al hacer clic en el botón de login
-//        binding.loginButton.setOnClickListener {
-//            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-//        }
+        // Observar el resultado del login
+        loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
+            result.fold(
+                onSuccess = {
+                    // Navegar al HomeFragment si el login es exitoso
+                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                },
+                onFailure = { exception ->
+                    // Mostrar mensaje de error si el login falla
+                    Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+                    binding.errorTextView.text = exception.message
+                    binding.errorTextView.visibility = View.VISIBLE
+                }
+            )
+        }
 
         // Navegar al RegisterFragment al hacer clic en el botón de register
         binding.registerButton.setOnClickListener {
