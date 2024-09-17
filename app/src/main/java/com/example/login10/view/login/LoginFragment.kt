@@ -26,7 +26,8 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         //establece los listeners para login
         binding.loginButton.setOnClickListener {
-            validateAndLogin()
+            //validateAndLogin()
+            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
         }
         //establecer los textWatcher para los campos de entrada
         binding.usernameEditText.addTextChangedListener(loginTextWatcher)
@@ -78,20 +79,21 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Observar el resultado del login
-        loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
-            result.fold(
-                onSuccess = {
-                    // Navegar al HomeFragment si el login es exitoso
-                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                },
-                onFailure = { exception ->
-                    // Mostrar mensaje de error si el login falla
-                    Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
-                    binding.errorTextView.text = exception.message
-                    binding.errorTextView.visibility = View.VISIBLE
-                }
-            )
-        }
+//        interaccion con el viewmodel descomentar
+//        loginViewModel.loginResult.observe(viewLifecycleOwner) { result ->
+//            result.fold(
+//                onSuccess = {
+//                    // Navegar al HomeFragment si el login es exitoso
+//                    findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+//                },
+//                onFailure = { exception ->
+//                    // Mostrar mensaje de error si el login falla
+//                    Toast.makeText(requireContext(), exception.message, Toast.LENGTH_SHORT).show()
+//                    binding.errorTextView.text = exception.message
+//                    binding.errorTextView.visibility = View.VISIBLE
+//                }
+//            )
+//        }
 
         // Navegar al RegisterFragment al hacer clic en el botón de register
         binding.registerButton.setOnClickListener {

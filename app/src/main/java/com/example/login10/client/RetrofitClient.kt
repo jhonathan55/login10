@@ -19,7 +19,9 @@ object RetrofitClient {
             originalResponse
         }
         .build()
-
+    fun getClient(): OkHttpClient {
+        return client
+    }
     val instance: LoginService by lazy {
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)

@@ -13,11 +13,27 @@
     <fragment
         android:id="@+id/productFragment"
         android:name="com.example.login10.view.home.product.ProductFragment"
-        android:label="fragment_product"
-        tools:layout="@layout/fragment_product" />
+        tools:layout="@layout/fragment_product">
+        <action
+            android:id="@+id/action_productFragment_to_detailFragment"
+            app:destination="@id/detailFragment">
+            <argument
+                android:name="productId"
+                app:argType="string" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.login10.view.home.welcome.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.login10.view.home.product.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <action
+            android:id="@+id/action_detailFragment_to_productFragment"
+            app:destination="@id/productFragment" />
+    </fragment>
 </navigation>

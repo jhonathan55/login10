@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("androidx.navigation.safeargs.kotlin")
+
 }
 
 android {
@@ -54,6 +56,7 @@ android {
 }
 
 dependencies {
+
     val nav_version = "2.7.7"
     val retrofit_version="2.11.0"
     // Navigation
@@ -64,7 +67,11 @@ dependencies {
     //retrofit
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
     implementation("com.squareup.retrofit2:converter-gson:$retrofit_version")
-
+     //testing
+    testImplementation ("junit:junit:4.13.2")
+    testImplementation ("com.squareup.okhttp3:mockwebserver:4.9.1")
+    testImplementation ("org.mockito:mockito-core:4.0.0")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.1.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

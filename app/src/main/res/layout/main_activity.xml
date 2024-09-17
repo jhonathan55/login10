@@ -34,4 +34,5 @@
         app:navGraph="@navigation/nav_graph"
         app:defaultNavHost="true"
       />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
